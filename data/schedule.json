@@ -1,0 +1,1485 @@
+{
+    "vessel": "m/s Viken",
+    "phone": "0400 320099",
+    "bookingUrl": "https://booking.finferries.fi",
+    "harbors": [
+        {
+            "name": "Granvik",
+            "lat": 60.1966,
+            "lon": 22.2614,
+            "description": "Main harbor on Nagu Storlandet"
+        },
+        {
+            "name": "Heisala",
+            "lat": 60.1771,
+            "lon": 22.2589,
+            "description": "Ferry jetty on Heisala island"
+        },
+        {
+            "name": "Björkholm",
+            "lat": 60.1853,
+            "lon": 22.2366,
+            "description": "Ferry jetty on Björkholm island"
+        },
+        {
+            "name": "Aspholm",
+            "lat": 60.1655,
+            "lon": 22.1757,
+            "description": "Ferry jetty on Aspholm island"
+        },
+        {
+            "name": "Kuggö",
+            "lat": 60.1479,
+            "lon": 22.1616,
+            "description": "Ferry jetty on Kuggö island"
+        },
+        {
+            "name": "Pensar",
+            "lat": 60.1479,
+            "lon": 22.1368,
+            "description": "Ferry jetty near Sandvik on Pensar island"
+        },
+        {
+            "name": "Granholmen",
+            "lat": 60.1914,
+            "lon": 22.2505,
+            "description": "Request stop on Granholmen",
+            "regular": false
+        },
+        {
+            "name": "Stenholm",
+            "lat": 60.1702,
+            "lon": 22.1663,
+            "description": "Request stop on Stenholm",
+            "regular": false
+        },
+        {
+            "name": "Ramsholm",
+            "lat": 60.1697,
+            "lon": 22.1840,
+            "description": "Request stop on Ramsholm",
+            "regular": false
+        }
+    ],
+    "seasons": [
+        {
+            "name": "winter",
+            "valid": {
+                "from": "2025-09-01",
+                "to": "2026-05-31"
+            },
+            "maxPassengers": 73,
+            "notes": {
+                "allTripsRequireBooking": true,
+                "bookingDeadline": "At least 10 min before departure from Granvik; morning trips must be booked by 17:00 the previous evening",
+                "granholmen": "Deviates at Granholmen if ordered, except on 07:45 and 14:00 Heisala trips",
+                "stenholm": "Deviates at Stenholm if ordered on Pensar trips",
+                "ramsholm": "Ramsholm jetty can be used when circumstances require"
+            },
+            "publicHolidays": [
+                {
+                    "date": "2025-12-06",
+                    "usesSchedule": "sat"
+                },
+                {
+                    "date": "2025-12-24",
+                    "usesSchedule": "sun",
+                    "until": "16:30"
+                },
+                {
+                    "date": "2025-12-25",
+                    "usesSchedule": "sun"
+                },
+                {
+                    "date": "2025-12-26",
+                    "usesSchedule": "sun"
+                },
+                {
+                    "date": "2025-12-31",
+                    "usesSchedule": "sun",
+                    "until": "16:30"
+                },
+                {
+                    "date": "2026-01-01",
+                    "usesSchedule": "sun"
+                },
+                {
+                    "date": "2026-01-06",
+                    "usesSchedule": "sun"
+                },
+                {
+                    "date": "2026-04-02",
+                    "usesSchedule": "fri"
+                },
+                {
+                    "date": "2026-04-03",
+                    "usesSchedule": "sun"
+                },
+                {
+                    "date": "2026-04-05",
+                    "usesSchedule": "sun"
+                },
+                {
+                    "date": "2026-04-06",
+                    "usesSchedule": "sun"
+                },
+                {
+                    "date": "2026-05-01",
+                    "usesSchedule": "sun"
+                },
+                {
+                    "date": "2026-05-14",
+                    "usesSchedule": "sun"
+                }
+            ],
+            "trips": [
+                {
+                    "id": "t01",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "06:00"
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "06:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "06:45",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "06:55",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "07:10",
+                            "approx": true
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "07:25",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "07:45"
+                        }
+                    ]
+                },
+                {
+                    "id": "t02",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "07:45"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "08:00",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "08:15"
+                        }
+                    ]
+                },
+                {
+                    "id": "t02w",
+                    "days": [
+                        "sat",
+                        "sun"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "10:00"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "10:15",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "10:30"
+                        }
+                    ]
+                },
+                {
+                    "id": "t03",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "08:15"
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "08:25",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "08:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "08:45",
+                            "approx": true
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "09:00",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "09:10",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "09:20",
+                            "approx": true
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "09:30",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "09:45"
+                        }
+                    ]
+                },
+                {
+                    "id": "t03w",
+                    "days": [
+                        "sat",
+                        "sun"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "10:30"
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "10:40",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "10:50",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "11:00",
+                            "approx": true
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "11:15",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "11:25",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "11:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "11:45",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "12:00"
+                        }
+                    ]
+                },
+                {
+                    "id": "t04",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "09:45"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "10:00",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "10:10",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "10:20"
+                        }
+                    ]
+                },
+                {
+                    "id": "t05",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "12:15"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "12:45",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "13:10",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "13:30"
+                        }
+                    ]
+                },
+                {
+                    "id": "t05w",
+                    "days": [
+                        "sat",
+                        "sun"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "12:00"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "12:20",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "12:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "12:45"
+                        }
+                    ]
+                },
+                {
+                    "id": "t06",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "14:00"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "14:10",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "14:25"
+                        }
+                    ]
+                },
+                {
+                    "id": "t07",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "14:25"
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "14:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "14:55",
+                            "approx": true
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "15:10",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "15:20",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "15:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "15:50",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "16:00"
+                        }
+                    ]
+                },
+                {
+                    "id": "t07w",
+                    "days": [
+                        "sat",
+                        "sun"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "14:15"
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "14:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "14:45",
+                            "approx": true
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "15:00",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "15:10",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "15:25",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "15:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "15:45"
+                        }
+                    ]
+                },
+                {
+                    "id": "t08",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "16:00"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "16:15",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "16:25",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "16:45"
+                        }
+                    ]
+                },
+                {
+                    "id": "t08w",
+                    "days": [
+                        "sat",
+                        "sun"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "15:45"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "16:05",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "16:20",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "16:30"
+                        }
+                    ]
+                },
+                {
+                    "id": "t09",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "16:45"
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "17:05",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "17:15",
+                            "approx": true
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "17:30",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "17:40",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "17:55",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "18:05",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "18:15"
+                        }
+                    ]
+                },
+                {
+                    "id": "t09w",
+                    "days": [
+                        "sat",
+                        "sun"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "16:30"
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "16:50",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "17:00",
+                            "approx": true
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "17:15",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "17:25",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "17:40",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "17:50",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "18:00"
+                        }
+                    ]
+                },
+                {
+                    "id": "t10",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "18:15"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "18:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "18:45",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "19:00"
+                        }
+                    ]
+                },
+                {
+                    "id": "t10f",
+                    "days": [
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "18:40"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "18:55",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "19:00",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "19:10"
+                        }
+                    ]
+                },
+                {
+                    "id": "t10w",
+                    "days": [
+                        "sat",
+                        "sun"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "18:00"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "18:20",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "18:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "18:45"
+                        }
+                    ]
+                },
+                {
+                    "id": "t11",
+                    "days": [
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "19:10"
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "19:30",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "19:40",
+                            "approx": true
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "20:00",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "20:10",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "20:40"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "summer",
+            "valid": {
+                "from": "2026-06-01",
+                "to": "2026-08-31"
+            },
+            "maxPassengers": 99,
+            "notes": {
+                "allTripsRequireBooking": true,
+                "bookingDeadline": "At least 10 min before departure from Granvik; morning trips must be booked by 17:00 the previous evening",
+                "granholmen": "Deviates at Granholmen if ordered, except on 07:45, 09:50 and 13:30 Heisala trips",
+                "stenholm": "Deviates at Stenholm if ordered on Pensar trips"
+            },
+            "publicHolidays": [
+                {
+                    "date": "2026-06-18",
+                    "usesSchedule": "fri"
+                },
+                {
+                    "date": "2026-06-19",
+                    "usesSchedule": "normal",
+                    "until": "18:00"
+                }
+            ],
+            "trips": [
+                {
+                    "id": "t01",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "06:00"
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "06:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "06:45",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "06:55",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "07:10",
+                            "approx": true
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "07:25",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "07:45"
+                        }
+                    ]
+                },
+                {
+                    "id": "t02",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "07:45"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "08:00",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "08:15"
+                        }
+                    ]
+                },
+                {
+                    "id": "t02w",
+                    "days": [
+                        "sat",
+                        "sun"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "09:50"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "10:05",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "10:15"
+                        }
+                    ]
+                },
+                {
+                    "id": "t03",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "08:15"
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "08:25",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "08:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "08:45",
+                            "approx": true
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "09:00"
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "09:10",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "09:20",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "09:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "09:50"
+                        }
+                    ]
+                },
+                {
+                    "id": "t03w",
+                    "days": [
+                        "sat",
+                        "sun"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "10:30"
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "10:40",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "10:50",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "11:00",
+                            "approx": true
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "11:15"
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "11:25",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "11:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "11:50",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "12:00"
+                        }
+                    ]
+                },
+                {
+                    "id": "t04",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "09:50"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "10:05",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "10:15"
+                        }
+                    ]
+                },
+                {
+                    "id": "t05",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "12:15"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "12:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "12:45",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "13:00"
+                        }
+                    ]
+                },
+                {
+                    "id": "t05w",
+                    "days": [
+                        "sat",
+                        "sun"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "12:00"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "12:15",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "12:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "12:45"
+                        }
+                    ]
+                },
+                {
+                    "id": "t06",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "13:30"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "13:45",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "14:00"
+                        }
+                    ]
+                },
+                {
+                    "id": "t07",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "14:00"
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "14:20",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "14:30",
+                            "approx": true
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "14:50"
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "15:00",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "15:15",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "15:30",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "15:40"
+                        }
+                    ]
+                },
+                {
+                    "id": "t07w",
+                    "days": [
+                        "sat",
+                        "sun"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "14:15"
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "14:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "14:45",
+                            "approx": true
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "15:00"
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "15:10",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "15:25",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "15:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "15:45"
+                        }
+                    ]
+                },
+                {
+                    "id": "t08",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri",
+                        "sat",
+                        "sun"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "15:45"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "16:05",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "16:15",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "16:30"
+                        }
+                    ]
+                },
+                {
+                    "id": "t09",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu",
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "16:30"
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "16:50",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "17:00",
+                            "approx": true
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "17:15"
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "17:25",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "17:40",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "17:50",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "18:00"
+                        }
+                    ]
+                },
+                {
+                    "id": "t09w",
+                    "days": [
+                        "sat",
+                        "sun"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "17:30"
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "17:50",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "18:00",
+                            "approx": true
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "18:15"
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "18:25",
+                            "approx": true
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "18:40",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "18:50",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "19:00"
+                        }
+                    ]
+                },
+                {
+                    "id": "t10",
+                    "days": [
+                        "mon",
+                        "tue",
+                        "wed",
+                        "thu"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "18:00"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "18:15",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "18:30",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "18:40"
+                        }
+                    ]
+                },
+                {
+                    "id": "t10f",
+                    "days": [
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "18:30"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "18:45",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "18:50",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "19:00"
+                        }
+                    ]
+                },
+                {
+                    "id": "t10w",
+                    "days": [
+                        "sat",
+                        "sun"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "19:00"
+                        },
+                        {
+                            "name": "Heisala",
+                            "time": "19:15",
+                            "approx": true
+                        },
+                        {
+                            "name": "Björkholm",
+                            "time": "19:30",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "19:40"
+                        }
+                    ]
+                },
+                {
+                    "id": "t11",
+                    "days": [
+                        "fri"
+                    ],
+                    "stops": [
+                        {
+                            "name": "Granvik",
+                            "time": "19:00"
+                        },
+                        {
+                            "name": "Aspholm",
+                            "time": "19:20",
+                            "approx": true
+                        },
+                        {
+                            "name": "Pensar",
+                            "time": "19:35",
+                            "approx": true
+                        },
+                        {
+                            "name": "Kuggö",
+                            "time": "19:45",
+                            "approx": true
+                        },
+                        {
+                            "name": "Granvik",
+                            "time": "20:30"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

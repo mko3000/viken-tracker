@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viken — Live Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+    <header>
+        <div class="vessel-title">
+            <div class="vessel-icon">⛴</div>
+            <div>
+                <h1>M/S <span>Viken</span></h1>
+                <div class="callsign">OIRW &nbsp;·&nbsp; MMSI 230987260 &nbsp;·&nbsp; Finnish Archipelago</div>
+            </div>
+        </div>
+        <div class="status-badge">
+            <div class="pulse-dot" id="statusDot"></div>
+            <span id="statusText">Connecting…</span>
+        </div>
+    </header>
+
+    <div class="main">
+        <aside class="sidebar">
+            <div class="section-label">Navigation</div>
+
+            <div class="stat-row">
+                <div class="stat-label">Speed Over Ground</div>
+                <div class="stat-value large" id="sog">—<span class="stat-unit">kn</span></div>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-label">Course Over Ground</div>
+                <div class="stat-value" id="cog">—<span class="stat-unit">°</span></div>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-label">True Heading</div>
+                <div class="stat-value" id="heading">—<span class="stat-unit">°</span></div>
+            </div>
+
+            <div class="compass-wrap">
+                <div class="stat-label" style="margin:0">Heading</div>
+                <div class="compass">
+                    <svg viewBox="0 0 80 80">
+                        <circle cx="40" cy="40" r="38" fill="none" stroke="#1a3050" stroke-width="1" />
+                        <circle cx="40" cy="40" r="32" fill="none" stroke="#0d1e35" stroke-width="8" />
+                        <text x="40" y="10" text-anchor="middle" fill="#4a7fa0" font-size="8"
+                            font-family="Space Mono">N</text>
+                        <text x="72" y="43" text-anchor="middle" fill="#4a7fa0" font-size="8"
+                            font-family="Space Mono">E</text>
+                        <text x="40" y="76" text-anchor="middle" fill="#4a7fa0" font-size="8"
+                            font-family="Space Mono">S</text>
+                        <text x="8" y="43" text-anchor="middle" fill="#4a7fa0" font-size="8"
+                            font-family="Space Mono">W</text>
+                        <g class="compass-needle" id="compassNeedle">
+                            <polygon points="40,14 43,40 40,46 37,40" fill="#00c8ff" opacity="0.9" />
+                            <polygon points="40,66 43,40 40,46 37,40" fill="#1a3050" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="section-label">Position</div>
+
+            <div class="stat-row">
+                <div class="stat-label">Latitude</div>
+                <div class="stat-value normal" id="lat">—</div>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-label">Longitude</div>
+                <div class="stat-value normal" id="lon">—</div>
+            </div>
+
+            <div class="section-label">Signal</div>
+
+            <div class="stat-row">
+                <div class="stat-label">Last AIS Fix</div>
+                <div class="stat-value normal" id="lastFix">—</div>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-label">Nav Status</div>
+                <div class="stat-value normal" id="navStat">—</div>
+            </div>
+
+            <button class="refresh-btn" id="refreshBtn" onclick="fetchVessel()">↻ &nbsp;Refresh Now</button>
+            <div class="countdown" id="countdown"></div>
+        </aside>
+
+        <div id="map"></div>
+    </div>
+
+    <div class="error-msg" id="errorMsg"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="assets/leaflet.rotatedMarker.js"></script>
+    <script type="module" src="js/tracker.js"></script>
+</body>
+
+</html>
