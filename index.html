@@ -13,14 +13,13 @@
 
     <header>
         <div class="vessel-title">
-            <div class="vessel-icon">⛴</div>
+            <div class="vessel-icon"><img src="assets/viken_pixel.png" alt="M/S Viken"></div>
             <div>
                 <h1>M/S <span>Viken</span></h1>
-                <div class="callsign">OIRW &nbsp;·&nbsp; MMSI 230987260 &nbsp;·&nbsp; Finnish Archipelago</div>
+                <div class="callsign">OIRW &nbsp;·&nbsp; MMSI 230987260 &nbsp;·&nbsp; Pargas route</div>
             </div>
         </div>
         <div class="status-badge">
-            <div class="pulse-dot" id="statusDot"></div>
             <span id="statusText">Connecting…</span>
         </div>
     </header>
@@ -68,36 +67,46 @@
 
             <div class="section-label">Position</div>
 
-            <div class="stat-row">
+            <div class="stat-row desktop-only">
                 <div class="stat-label">Latitude</div>
                 <div class="stat-value normal" id="lat">—</div>
             </div>
 
-            <div class="stat-row">
+            <div class="stat-row desktop-only">
                 <div class="stat-label">Longitude</div>
                 <div class="stat-value normal" id="lon">—</div>
             </div>
 
+            <div class="stat-row mobile-only">
+                <div class="stat-label">Position</div>
+                <div class="stat-value normal" id="pos">—</div>
+            </div>
+
             <div class="section-label">Signal</div>
 
-            <div class="stat-row">
+            <div class="stat-row desktop-only">
                 <div class="stat-label">Last AIS Fix</div>
                 <div class="stat-value normal" id="lastFix">—</div>
             </div>
 
-            <div class="stat-row">
+            <div class="stat-row desktop-only">
                 <div class="stat-label">Nav Status</div>
                 <div class="stat-value normal" id="navStat">—</div>
             </div>
 
-            <button class="refresh-btn" id="refreshBtn" onclick="fetchVessel()">↻ &nbsp;Refresh Now</button>
+            <div class="stat-row">
+                <div class="stat-label">Next from Granvik</div>
+                <div class="stat-value normal" id="granvikDep">—</div>
+            </div>
+
+            <button class="refresh-btn" id="refreshBtn">↻ &nbsp;Refresh Now</button>
             <div class="countdown" id="countdown"></div>
         </aside>
 
         <div id="map"></div>
     </div>
 
-    <div class="error-msg" id="errorMsg"></div>
+
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="assets/leaflet.rotatedMarker.js"></script>

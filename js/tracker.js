@@ -15,15 +15,19 @@ const NAV_STATUS = {
     15: 'Undefined'
 };
 
+
 let map, marker, polyline;
 let trail = [];
 let countdown = REFRESH_SEC;
 let timer;
+const curTime = new Date();
+console.log(curTime);
+const curShcedule = getCurrentSchedule();
 
 // Init map — centered on Finnish SW archipelago 
 map = L.map('map', { zoomControl: true, attributionControl: true }).setView([60.17, 22.21], 13);
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '© OpenStreetMap contributors © CARTO | AIS data: Digitraffic/Fintraffic',
     subdomains: 'abcd',
     maxZoom: 19
@@ -41,25 +45,39 @@ let lastAngle = 0;
 
 const harborIcon = L.divIcon({
     html: `<div style="
-    width:16px;height:16px;
-    background:var(--accent,#00c8ff);
-    border:2px solid #fff;
+    width:14px;height:14px;
+    background:#1B2D52;
+    border:2px solid #C8890F;
     border-radius:50%;
-    box-shadow:0 0 0 4px rgba(0,200,255,0.25), 0 0 16px rgba(0,200,255,0.5);
+    box-shadow:0 2px 6px rgba(27,45,82,0.35);
   "></div>`,
-    iconSize: [16, 16],
-    iconAnchor: [8, 8],
+    iconSize: [14, 14],
+    iconAnchor: [7, 7],
     className: ''
 });
 
 const harbors = routeData.harbors;
+const harborNames = [];
 for (const harbor of harbors) {
-    console.log(harbor.name, ": [", harbor.lat, ",", harbor.lon, "]");
+    // console.log(harbor.name, ": [", harbor.lat, ",", harbor.lon, "]");
+    let nextDeparture;
+    if ("regular" in harbor && !harbor.regular) {
+        // pass
+    } else {
+        nextDeparture = getNextDeparture(harbor.name);
+    }
     const harborMarker = L.marker([harbor.lat, harbor.lon], {
         icon: harborIcon
     }).addTo(map);
-    harborMarker.bindPopup(`<b>${harbor.name}</b>`);
+    harborMarker.bindTooltip(
+        `<div class="harbor-label-name">${harbor.name}</div>${nextDeparture !== undefined ? `<div class="harbor-label-departure">${nextDeparture}</div>` : ''}`,
+        {
+            className: 'harbor-label'
+        });
 }
+
+const granvikDep = getNextDeparture("Granvik");
+document.getElementById('granvikDep').textContent = granvikDep ?? '—';
 
 function iconDimensions() {
     const scale = Math.pow(2, (map.getZoom() - 13) * 0.5);
@@ -91,23 +109,16 @@ function updateTooltip() {
     }).openTooltip();
 }
 
-function setStatus(state, text) {
-    const dot = document.getElementById('statusDot');
+function setStatus(state, html) {
     const txt = document.getElementById('statusText');
-    dot.className = 'pulse-dot ' + (state === 'live' ? 'live' : state === 'error' ? 'error' : '');
-    txt.textContent = text;
+    txt.innerHTML = html;
+    txt.style.color = state === 'error' ? 'var(--warn)' : '';
 }
 
-function showError(msg) {
-    const el = document.getElementById('errorMsg');
-    el.textContent = msg;
-    el.style.display = 'block';
-    setTimeout(() => el.style.display = 'none', 6000);
-}
 
 function formatTime(epoch) {
     const d = new Date(epoch * 1000);
-    return d.toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    return d.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 }
 
 function setCompass(degrees) {
@@ -124,10 +135,76 @@ function vesselAngle(degrees, sog) {
     return { angle: degrees, flip };
 }
 
+function getNextDeparture(harbor) {
+    console.log(`getting next stop for ${harbor} at ${curTime}`)
+    const stops = getTodaysStops(harbor);
+    console.log(stops);
+    let nextIndex;
+
+    for (const t of stops.times) {
+        console.log(t, t > curTime);
+        if (t > curTime) {
+            nextIndex = stops.times.indexOf(t);
+            break;
+        }
+    }
+    if (nextIndex) return stops.timeStrings[nextIndex]
+    return null;
+}
+
+function getCurrentSchedule() {
+    for (const season of routeData.seasons) {
+        if (curTime >= Date.parse(season.valid.from) && curTime < Date.parse(season.valid.to)) {
+            return season;
+        }
+    }
+    return null;
+}
+
+function getCurrentShceduleDay() {
+    const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    let weekday = days[curTime.getDay()];
+    const dateString = `${curTime.getFullYear}-${curTime.getMonth() + 1}-${curTime.getDate()}`;
+    for (const holiday of curShcedule.publicHolidays) {
+        if (dateString === holiday.date) {
+            if ("until" in holiday) {
+                const until = Date.parse(holiday.date, holiday.until);
+                if (curTime > until) break;
+                weekday = holiday.usesSchedule;
+            }
+        }
+    }
+    return weekday;
+}
+
+function getTodaysStops(harbor) {
+    const stops = {
+        timeStrings: [],
+        times: []
+    };
+    const weekday = getCurrentShceduleDay();
+    console.log(weekday);
+    for (const trip of curShcedule.trips) {
+        if (trip.days.includes(weekday)) {
+            const lastStop = trip.stops[trip.stops.length - 1];
+            for (const stop of trip.stops) {
+                if (stop.name === harbor && stop !== lastStop) {
+                    let stopString = stop.time;
+                    if ("approx" in stop && stop.approx) stopString += "*";
+                    const stopTime = new Date(curTime.getFullYear(), curTime.getMonth(), curTime.getDate(), stop.time.split(":")[0], stop.time.split(":")[1]);
+                    stops.timeStrings.push(stopString);
+                    stops.times.push(stopTime);
+                }
+            }
+        }
+    }
+    return stops;
+}
+
 async function fetchVessel() {
     const btn = document.getElementById('refreshBtn');
     btn.disabled = true;
-    btn.innerHTML = '<span class="spinning">↻</span> &nbsp;Fetching…';
+    btn.innerHTML = '<span class="spinning">↻</span> &nbsp;Refreshing…';
     setStatus('', 'Fetching…');
 
     try {
@@ -141,8 +218,7 @@ async function fetchVessel() {
         else if (Array.isArray(data)) features = data;
 
         if (!features.length) {
-            setStatus('error', 'No AIS data');
-            showError('No AIS signal received for Viken. Vessel may be in port or out of coverage.');
+            setStatus('error', 'No AIS signal — vessel may be in port or out of coverage');
             btn.disabled = false;
             btn.innerHTML = '↻ &nbsp;Refresh Now';
             return;
@@ -165,6 +241,7 @@ async function fetchVessel() {
         el('heading', heading !== '—' ? `${heading}<span class="stat-unit">°</span>` : '—');
         el('lat', lat.toFixed(5) + ' N');
         el('lon', lon.toFixed(5) + ' E');
+        el('pos', `${lat.toFixed(3)} N, ${lon.toFixed(3)} E`);
         el('lastFix', ts ? formatTime(typeof ts === 'number' && ts > 1e10 ? ts / 1000 : ts) : '—');
         el('navStat', NAV_STATUS[navStat] ?? `Code ${navStat}`);
 
@@ -200,33 +277,34 @@ async function fetchVessel() {
             }).addTo(map);
         }
 
-        setStatus('live', `Live · updated ${formatTime(ts ? (typeof ts === 'number' && ts > 1e10 ? ts / 1000 : ts) : Date.now() / 1000)}`);
+        const fetchedAt = formatTime(Date.now() / 1000);
+        const aisAt = ts ? formatTime(typeof ts === 'number' && ts > 1e10 ? ts / 1000 : ts) : '—';
+        setStatus('live', `<span style="white-space:nowrap">fetched ${fetchedAt}</span><br><span style="white-space:nowrap">AIS ${aisAt}</span>`);
 
     } catch (e) {
-        setStatus('error', 'Fetch failed');
-        showError(`API error: ${e.message}`);
+        setStatus('error', `Fetch failed: ${e.message}`);
         console.error(e);
     }
 
     btn.disabled = false;
-    btn.innerHTML = '↻ &nbsp;Refresh Now';
     resetCountdown();
 }
 
 function resetCountdown() {
     clearInterval(timer);
     countdown = REFRESH_SEC;
+    const btn = document.getElementById('refreshBtn');
+    btn.innerHTML = `↻ &nbsp;Refresh Now (${countdown}s)`;
     timer = setInterval(() => {
         countdown--;
-        const cd = document.getElementById('countdown');
         if (countdown > 0) {
-            cd.textContent = `Auto-refresh in ${countdown}s`;
+            btn.innerHTML = `↻ &nbsp;Refresh Now (${countdown}s)`;
         } else {
-            cd.textContent = 'Refreshing…';
             fetchVessel();
         }
     }, 1000);
 }
 
 // Start
+document.getElementById('refreshBtn').addEventListener('click', fetchVessel);
 fetchVessel();
