@@ -69,11 +69,14 @@ for (const harbor of harbors) {
     const harborMarker = L.marker([harbor.lat, harbor.lon], {
         icon: harborIcon
     }).addTo(map);
+    let harborText = `<div class="harbor-label-name">${harbor.name}</div>`
+    if (nextDeparture !== undefined && nextDeparture !== null) harborText += `<div class="harbor-label-departure">${nextDeparture}</div>`
     harborMarker.bindTooltip(
-        `<div class="harbor-label-name">${harbor.name}</div>${nextDeparture !== undefined ? `<div class="harbor-label-departure">${nextDeparture}</div>` : ''}`,
+        harborText,
         {
             className: 'harbor-label'
-        });
+        }
+    );
 }
 
 const granvikDep = getNextDeparture("Granvik");
