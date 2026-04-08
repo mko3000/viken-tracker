@@ -46,6 +46,12 @@ header {
     gap: 14px;
 }
 
+.vessel-icon {
+    background: radial-gradient(ellipse at center 55%, rgba(232, 164, 40, 0.45) 0%, transparent 80%);
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
 .vessel-icon img {
     height: 36px;
     width: auto;
