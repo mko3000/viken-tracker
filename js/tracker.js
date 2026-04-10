@@ -58,7 +58,6 @@ const harborIcon = L.divIcon({
 const harbors = routeData.harbors;
 const harborNames = [];
 for (const harbor of harbors) {
-    // console.log(harbor.name, ": [", harbor.lat, ",", harbor.lon, "]");
     let nextDeparture;
     if ("regular" in harbor && !harbor.regular) {
         // pass
