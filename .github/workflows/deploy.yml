@@ -1,7 +1,7 @@
 name: Deploy Viken Tracker
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   deploy:
