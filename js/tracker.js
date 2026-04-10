@@ -23,7 +23,7 @@ let timer;
 const curTime = new Date();
 const curShcedule = getCurrentSchedule();
 
-// Init map — centered on Finnish SW archipelago 
+// Init map — centered on Pargas archipelago 
 map = L.map('map', { zoomControl: true, attributionControl: true }).setView([60.17, 22.21], 13);
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
