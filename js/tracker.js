@@ -21,7 +21,6 @@ let trail = [];
 let countdown = REFRESH_SEC;
 let timer;
 const curTime = new Date();
-console.log(curTime);
 const curShcedule = getCurrentSchedule();
 
 // Init map — centered on Finnish SW archipelago 
@@ -139,19 +138,13 @@ function vesselAngle(degrees, sog) {
 }
 
 function getNextDeparture(harbor) {
-    console.log(`getting next stop for ${harbor} at ${curTime}`)
     const stops = getTodaysStops(harbor);
-    console.log(stops);
-    let nextIndex;
 
-    for (const t of stops.times) {
-        console.log(t, t > curTime);
-        if (t > curTime) {
-            nextIndex = stops.times.indexOf(t);
-            break;
+    for (let i = 0; i < stops.times.length; i++) {
+        if (stops.times[i] > curTime) {
+            return stops.timeStrings[i]
         }
     }
-    if (nextIndex) return stops.timeStrings[nextIndex]
     return null;
 }
 
@@ -168,13 +161,13 @@ function getCurrentShceduleDay() {
     const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
     let weekday = days[curTime.getDay()];
     const dateString = `${curTime.getFullYear}-${curTime.getMonth() + 1}-${curTime.getDate()}`;
-    for (const holiday of curShcedule.publicHolidays) {
-        if (dateString === holiday.date) {
-            if ("until" in holiday) {
-                const until = Date.parse(holiday.date, holiday.until);
-                if (curTime > until) break;
-                weekday = holiday.usesSchedule;
-            }
+    const holiday = curShcedule.publicHolidays.filter(h => h.date === dateString)[0];
+    if (holiday) {
+        if ("until" in holiday) {
+            const until = Date.parse(holiday.date, holiday.until);
+            if (curTime < until) weekday = holiday.usesSchedule;
+        } else {
+            weekday = holiday.usesSchedule;
         }
     }
     return weekday;
@@ -186,7 +179,6 @@ function getTodaysStops(harbor) {
         times: []
     };
     const weekday = getCurrentShceduleDay();
-    console.log(weekday);
     for (const trip of curShcedule.trips) {
         if (trip.days.includes(weekday)) {
             const lastStop = trip.stops[trip.stops.length - 1];

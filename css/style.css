@@ -331,8 +331,10 @@ h1 span {
 
 /* Mobile layout */
 @media (max-width: 600px) {
-    body {
-        overflow: auto;
+    html, body {
+        height: 100dvh;
+        overflow: hidden;
+        min-height: unset;
     }
 
     header {
@@ -349,12 +351,14 @@ h1 span {
 
     .main {
         flex-direction: column;
-        overflow: visible;
+        overflow: hidden;
+        flex: 1;
+        min-height: 0;
     }
 
     #map {
-        height: 55vmax;
-        flex: none;
+        flex: 1;
+        min-height: 0;
         order: -1;
     }
 
@@ -367,6 +371,7 @@ h1 span {
         overflow-y: visible;
         padding: 6px;
         gap: 5px;
+        flex-shrink: 0;
     }
 
     .section-label {
