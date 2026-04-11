@@ -3,7 +3,7 @@
 ## Project
 Live AIS tracker for M/S Viken (MMSI 230987260, callsign OIRW), a FinFerries passenger ferry on the Pargas route in the Finnish archipelago.
 
-Schedule data lives in `data/schedule.json`. Source PDFs are in `misc/`. The booking system is at https://booking.finferries.fi.
+Schedule data lives in `data/schedule.json`. Source PDFs are in `data/schedule_source/`. The booking system is at https://booking.finferries.fi.
 
 ---
 
