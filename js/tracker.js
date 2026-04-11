@@ -1,4 +1,5 @@
 import routeData from '../data/schedule.json' with { type: 'json' };
+import { formatTime, vesselAngle, getCurrentSchedule, getNextDeparture } from './schedule.js';
 console.log(`Tracking the ${routeData.vessel}`);
 
 const MMSI = 230987260;
@@ -21,7 +22,7 @@ let trail = [];
 let countdown = REFRESH_SEC;
 let timer;
 const curTime = new Date();
-const curShcedule = getCurrentSchedule();
+const curShcedule = getCurrentSchedule(curTime, routeData.seasons);
 
 // Init map — centered on Pargas archipelago 
 map = L.map('map', { zoomControl: true, attributionControl: true }).setView([60.17, 22.21], 13);
@@ -62,7 +63,7 @@ for (const harbor of harbors) {
     if ("regular" in harbor && !harbor.regular) {
         // pass
     } else {
-        nextDeparture = getNextDeparture(harbor.name);
+        nextDeparture = getNextDeparture(harbor.name, curTime, curShcedule);
     }
     const harborMarker = L.marker([harbor.lat, harbor.lon], {
         icon: harborIcon
@@ -77,7 +78,7 @@ for (const harbor of harbors) {
     );
 }
 
-const granvikDep = getNextDeparture("Granvik");
+const granvikDep = getNextDeparture("Granvik", curTime, curShcedule);
 document.getElementById('granvikDep').textContent = granvikDep ?? '—';
 
 function iconDimensions() {
@@ -117,83 +118,11 @@ function setStatus(state, html) {
 }
 
 
-function formatTime(epoch) {
-    const d = new Date(epoch * 1000);
-    return d.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-}
-
 function setCompass(degrees) {
     document.getElementById('compassNeedle').style.transform = `rotate(${degrees}deg)`;
 }
 
 function el(id, val) { document.getElementById(id).innerHTML = val; }
-
-function vesselAngle(degrees, sog) {
-    if (sog === 0) return { angle: 0, flip: false };
-    const flip = degrees > 180;
-    if (flip) degrees -= 180;
-    degrees -= 90;
-    return { angle: degrees, flip };
-}
-
-function getNextDeparture(harbor) {
-    const stops = getTodaysStops(harbor);
-
-    for (let i = 0; i < stops.times.length; i++) {
-        if (stops.times[i] > curTime) {
-            return stops.timeStrings[i]
-        }
-    }
-    return null;
-}
-
-function getCurrentSchedule() {
-    for (const season of routeData.seasons) {
-        if (curTime >= Date.parse(season.valid.from) && curTime < Date.parse(season.valid.to)) {
-            return season;
-        }
-    }
-    return null;
-}
-
-function getCurrentShceduleDay() {
-    const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-    let weekday = days[curTime.getDay()];
-    const dateString = `${curTime.getFullYear}-${curTime.getMonth() + 1}-${curTime.getDate()}`;
-    const holiday = curShcedule.publicHolidays.filter(h => h.date === dateString)[0];
-    if (holiday) {
-        if ("until" in holiday) {
-            const until = Date.parse(holiday.date, holiday.until);
-            if (curTime < until) weekday = holiday.usesSchedule;
-        } else {
-            weekday = holiday.usesSchedule;
-        }
-    }
-    return weekday;
-}
-
-function getTodaysStops(harbor) {
-    const stops = {
-        timeStrings: [],
-        times: []
-    };
-    const weekday = getCurrentShceduleDay();
-    for (const trip of curShcedule.trips) {
-        if (trip.days.includes(weekday)) {
-            const lastStop = trip.stops[trip.stops.length - 1];
-            for (const stop of trip.stops) {
-                if (stop.name === harbor && stop !== lastStop) {
-                    let stopString = stop.time;
-                    if ("approx" in stop && stop.approx) stopString += "*";
-                    const stopTime = new Date(curTime.getFullYear(), curTime.getMonth(), curTime.getDate(), stop.time.split(":")[0], stop.time.split(":")[1]);
-                    stops.timeStrings.push(stopString);
-                    stops.times.push(stopTime);
-                }
-            }
-        }
-    }
-    return stops;
-}
 
 async function fetchVessel() {
     const btn = document.getElementById('refreshBtn');
