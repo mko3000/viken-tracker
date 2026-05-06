@@ -21,8 +21,6 @@ let map, marker, polyline;
 let trail = [];
 let countdown = REFRESH_SEC;
 let timer;
-const curTime = new Date();
-const curShcedule = getCurrentSchedule(curTime, routeData.seasons);
 
 // Init map — centered on Pargas archipelago 
 map = L.map('map', { zoomControl: true, attributionControl: true }).setView([60.17, 22.21], 13);
@@ -57,29 +55,29 @@ const harborIcon = L.divIcon({
 });
 
 const harbors = routeData.harbors;
-const harborNames = [];
-for (const harbor of harbors) {
-    let nextDeparture;
-    if ("regular" in harbor && !harbor.regular) {
-        // pass
-    } else {
-        nextDeparture = getNextDeparture(harbor.name, curTime, curShcedule);
-    }
-    const harborMarker = L.marker([harbor.lat, harbor.lon], {
-        icon: harborIcon
-    }).addTo(map);
-    let harborText = `<div class="harbor-label-name">${harbor.name}</div>`
-    if (nextDeparture !== undefined && nextDeparture !== null) harborText += `<div class="harbor-label-departure">${nextDeparture}</div>`
-    harborMarker.bindTooltip(
-        harborText,
-        {
-            className: 'harbor-label'
+const harborMarkers = harbors.map(harbor => {
+    const m = L.marker([harbor.lat, harbor.lon], { icon: harborIcon }).addTo(map);
+    return { harbor, marker: m };
+});
+
+function refreshSchedule() {
+    const now = new Date();
+    const schedule = getCurrentSchedule(now, routeData.seasons);
+    for (const { harbor, marker } of harborMarkers) {
+        let harborText = `<div class="harbor-label-name">${harbor.name}</div>`;
+        if (!("regular" in harbor && !harbor.regular)) {
+            const dep = getNextDeparture(harbor.name, now, schedule);
+            if (dep != null) harborText += `<div class="harbor-label-departure">${dep}</div>`;
         }
-    );
+        marker.unbindTooltip();
+        marker.bindTooltip(harborText, { className: 'harbor-label' });
+    }
+    const granvikDep = getNextDeparture("Granvik", now, schedule);
+    document.getElementById('granvikDep').textContent = granvikDep ?? '—';
 }
 
-const granvikDep = getNextDeparture("Granvik", curTime, curShcedule);
-document.getElementById('granvikDep').textContent = granvikDep ?? '—';
+refreshSchedule();
+setInterval(refreshSchedule, 60_000);
 
 function iconDimensions() {
     const scale = Math.pow(2, (map.getZoom() - 13) * 0.5);
@@ -131,7 +129,7 @@ async function fetchVessel() {
     setStatus('', 'Fetching…');
 
     try {
-        const res = await fetch(API);
+        const res = await fetch(API, { cache: 'no-store' });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
 
@@ -157,6 +155,7 @@ async function fetchVessel() {
         const heading = props.heading ?? '—';
         const navStat = props.navStat ?? props.navigationStatus ?? 15;
         const ts = props.timestampExternal || props.time || props.timestamp;
+        console.log(`AIS ts: ${ts}, time: ${formatTime(typeof ts === 'number' && ts > 1e10 ? ts / 1000 : ts)}, seconds since update: ${(new Date() - ts)/1000}`)
 
         // Update sidebar
         el('sog', sog !== '—' ? `${parseFloat(sog).toFixed(1)}<span class="stat-unit">kn</span>` : '—');
