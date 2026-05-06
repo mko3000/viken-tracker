@@ -230,4 +230,7 @@ function resetCountdown() {
 
 // Start
 document.getElementById('refreshBtn').addEventListener('click', fetchVessel);
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') fetchVessel();
+});
 fetchVessel();
