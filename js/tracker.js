@@ -1,4 +1,5 @@
-import routeData from '../data/schedule.json' with { type: 'json' };
+// Bump the ?v= query when schedule.json changes, so cached copies (browser/CDN) don't go stale
+import routeData from '../data/schedule.json?v=2' with { type: 'json' };
 import { formatTime, vesselAngle, getCurrentSchedule, getNextDeparture } from './schedule.js';
 console.log(`Tracking the ${routeData.vessel}`);
 
@@ -25,10 +26,15 @@ let timer;
 // Init map — centered on Pargas archipelago 
 map = L.map('map', { zoomControl: true, attributionControl: true }).setView([60.17, 22.21], 13);
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap contributors © CARTO | AIS data: Digitraffic/Fintraffic',
-    subdomains: 'abcd',
-    maxZoom: 19
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+    attribution: '© Esri © OpenStreetMap contributors | AIS data: Digitraffic/Fintraffic',
+    maxZoom: 19,
+    maxNativeZoom: 16
+}).addTo(map);
+
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 19,
+    maxNativeZoom: 16
 }).addTo(map);
 
 map.on('zoomend', () => {
