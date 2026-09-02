@@ -46,6 +46,7 @@ export function getCurrentScheduleDay(curTime, schedule) {
 
 export function getTodaysStops(harbor, curTime, schedule) {
     const stops = { timeStrings: [], times: [] };
+    if (!schedule) return stops;
     const weekday = getCurrentScheduleDay(curTime, schedule);
     for (const trip of schedule.trips) {
         if (!trip.days.includes(weekday)) continue;

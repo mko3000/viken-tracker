@@ -63,6 +63,7 @@ const harborMarkers = harbors.map(harbor => {
 function refreshSchedule() {
     const now = new Date();
     const schedule = getCurrentSchedule(now, routeData.seasons);
+    document.getElementById('scheduleBanner').hidden = schedule != null;
     for (const { harbor, marker } of harborMarkers) {
         let harborText = `<div class="harbor-label-name">${harbor.name}</div>`;
         if (!("regular" in harbor && !harbor.regular)) {

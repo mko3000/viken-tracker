@@ -53,8 +53,8 @@ describe('getCurrentSchedule', () => {
     });
 
     it('returns null outside all seasons', () => {
-        // After summer ends 2026-08-31
-        const date = new Date('2026-09-15T10:00:00');
+        // Before the earliest defined season starts
+        const date = new Date('2025-08-01T10:00:00');
         const result = getCurrentSchedule(date, schedule.seasons);
         expect(result).toBeNull();
     });
@@ -115,6 +115,11 @@ describe('getTodaysStops', () => {
         expect(stops.timeStrings[0]).toBe('10:00');
     });
 
+    it('returns empty stops when no schedule is active (null)', () => {
+        const stops = getTodaysStops('Granvik', wednesday, null);
+        expect(stops).toEqual({ timeStrings: [], times: [] });
+    });
+
     it('does not include the final stop of a round trip as a departure', () => {
         // Granvik is the last stop of t01 (07:45 return) — but also appears as first stop.
         // Only the outbound 06:00 departure should appear, not the 07:45 terminal arrival.
@@ -152,5 +157,9 @@ describe('getNextDeparture', () => {
         // 2025-12-06 Independence Day uses sat schedule (t02w first at 10:00)
         const at0900 = new Date('2025-12-06T09:00:00');
         expect(getNextDeparture('Granvik', at0900, winter)).toBe('10:00');
+    });
+
+    it('returns null when no schedule is active (null)', () => {
+        expect(getNextDeparture('Granvik', new Date('2026-09-15T10:00:00'), null)).toBeNull();
     });
 });
